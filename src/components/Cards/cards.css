@@ -1,0 +1,33 @@
+.main {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+.box-title h1 {
+  color: #333333;
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.box-title h3 {
+  color: #999999;
+  font-size: 18.2px;
+}
+
+.box-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5em;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+}

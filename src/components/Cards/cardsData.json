@@ -1,0 +1,42 @@
+[
+  {
+    "cidade": "Belo Horizonte - Funcionários",
+    "descricao": "A Unidade Funcionários abriu suas portas em março de 1963, apresentando uma nova proposta pedagógica para a educação da infância e da adolescência.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2014/04/cropped-func.jpg"
+  },
+  {
+    "cidade": "Belo Horizonte - Cidade Nova",
+    "descricao": "Baseada na pedagogia logosófica, a educação oferecida na Unidade Cidade Nova propõe a formação integral de crianças e adolescentes, com estímulo ao cultivo de conceitos.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2014/04/cropped-fachada-cidade-nova.jpg"
+  },
+  {
+    "cidade": "Brasília",
+    "descricao": "Há mais de 30 anos, a equipe do Colégio Logosófico de Brasília assegura à infância e à adolescência as condições básicas para condução com acerto pelos caminhos do mundo.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2014/07/Fotos-CL-Unidade-BRAS%C3%B7LIA-2014-22_560x310_acf_cropped.jpg"
+  },
+  {
+    "cidade": "Chapecó",
+    "descricao": "Com uma área de mais de 27.000 m², atende desde a Educação Infantil ao Ensino Fundamental 2, levando às crianças e adolescentes valores fundamentais ao desenvolvimento.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2014/07/IMG_0935-Copy_560x310_acf_cropped.jpg"
+  },
+  {
+    "cidade": "Florianópolis",
+    "descricao": "Localizado em ponto de fácil acesso às regiões de Florianópolis, o Colégio atua para que seus alunos sejam mais conscientes de seus atos, pensamentos e sentimentos.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2014/04/cropped-floripa.jpg"
+  },
+  {
+    "cidade": "Goiânia",
+    "descricao": "Situado em uma região nobre de Goiânia, nosso Colégio oferece uma educação que prioriza o cultivo de elevados valores mentais, morais e espirituais.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2016/10/DSC_0579_560x310_acf_cropped_560x310_acf_cropped.jpg"
+  },
+  {
+    "cidade": "Rio de Janeiro",
+    "descricao": "Com o grande propósito de bem, que é o de preservar as mentes dos alunos, a escola oferece aos alunos, em horário integral, uma educação também integral.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2014/07/Logoso%DD%81fico_011_560x310_acf_cropped.jpg"
+  },
+  {
+    "cidade": "Uberlândia",
+    "descricao": "Localizada em região nobre da cidade de Uberlândia, no bairro Vigilato Pereira, a unidade está circundada pelos bairros Morada da Colina, Jardim Karaíba, entre outros.",
+    "img": "https://www.colegiologosofico.com.br/wordpress/wp-content/uploads/2016/10/Fachada-resolucao-alta_560x310_acf_cropped-1.jpg"
+  }
+]
