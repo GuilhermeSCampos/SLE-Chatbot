@@ -6,3 +6,7 @@
   box-sizing: border-box;
   font-family: "Open sans", arial, sans-serif;
 }
+
+body {
+  overflow-x: hidden;
+}
