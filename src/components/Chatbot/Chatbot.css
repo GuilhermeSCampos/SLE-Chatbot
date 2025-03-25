@@ -31,6 +31,7 @@
   bottom: 80px;
   right: 0;
   width: 350px;
+  height: 550px;
   background-color: white;
   padding: 15px;
   border-radius: 10px;
@@ -50,6 +51,7 @@
 .chatbot-header {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   align-items: center;
   font-size: 16px;
   font-weight: bold;
@@ -59,6 +61,7 @@
 .close-btn {
   background: none;
   border: none;
+  width: fit-content;
   font-size: 24px;
   cursor: pointer;
   color: #555;
@@ -68,4 +71,26 @@
   margin-top: 10px;
   font-size: 14px;
   color: #555;
+}
+
+.chatbot-input-container {
+  width: 95%;
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+}
+
+.chatbot-input {
+  width: 100%;
+  border: 1px solid rgb(90, 70, 70);
+  border-radius: 15px;
+  padding: 8px 40px 8px 10px;
+}
+
+.chatbot-input-btn {
+  position: absolute;
+  top: 3px;
+  transform: translateX(-110%);
+  transition: opacity 0.2s ease-in-out;
+  width: fit-content;
 }

@@ -12,6 +12,7 @@ function Cards() {
       <section className="cards">
         {cardsData.map((card) => (
           <Card
+            key={card.cidade}
             img={card.img}
             description={card.descricao}
             title={card.cidade}
