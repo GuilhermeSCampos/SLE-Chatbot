@@ -97,3 +97,9 @@
   transition: opacity 0.2s ease-in-out;
   width: fit-content;
 }
+
+.typing-indicator {
+  font-style: italic;
+  color: gray;
+  margin-left: 10px;
+}
