@@ -3,6 +3,7 @@ import "./Chatbot.css";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaAngleDown } from "react-icons/fa6";
 import { IoMdClose, IoMdSend } from "react-icons/io";
+import MessageCard from "../MessageCard/MessageCard";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,9 +37,7 @@ const Chatbot = () => {
         </div>
         <div className="chatbot-content">
           {messages.map((msg, index) => (
-            <p key={index} className={msg.sender}>
-              {msg.text}
-            </p>
+            <MessageCard key={index} sender={msg.sender} text={msg.text} />
           ))}
         </div>
         <div className="chatbot-input-container">
