@@ -93,6 +93,13 @@ export const intents = [
     type: "responsavel",
     keywords: ["falar", "contato", "Fale com a Escola"],
   },
+  {
+    text: "Menu Principal",
+    response: "",
+    category: "menu",
+    type: ["aluno", "responsavel"],
+    keywords: ["principal", "voltar", "menu", "menus"],
+  },
 ];
 
 // Configuração do Fuse.js para busca aproximada

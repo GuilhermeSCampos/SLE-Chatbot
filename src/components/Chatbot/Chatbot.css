@@ -31,21 +31,11 @@
   bottom: 80px;
   right: 0;
   width: 400px;
-  height: 550px;
+  height: 600px;
   background-color: white;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  display: none;
-}
-
-.chatbot-window.open {
-  opacity: 1;
-  transform: translateY(0);
-  display: block;
 }
 
 .chatbot-header {
@@ -58,15 +48,26 @@
   color: #333;
 }
 
-.close-btn {
+.header-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.close-btn,
+.reset-btn {
   background: none;
   border: none;
   width: fit-content;
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
-  color: #555;
+  color: #837e7e;
+  transition: color 0.3s ease;
 }
 
+.close-btn:hover,
+.reset-btn:hover {
+  color: #222; /* Cor mais escura ao passar o mouse */
+}
 .chatbot-content {
   display: flex;
   flex-direction: column;
