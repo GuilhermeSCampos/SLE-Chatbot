@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { intents, fuse } from "./fuseIntents";
 import "./Chatbot.css";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { FaAngleDown } from "react-icons/fa6";
@@ -6,7 +7,7 @@ import { IoMdClose, IoMdSend } from "react-icons/io";
 import MessageCard from "../MessageCard/MessageCard";
 import Option from "../Option/Option";
 import { ThreeDot } from "react-loading-indicators";
-import { div } from "framer-motion/client";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,47 +15,104 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState([]);
   const [isInitialMessageSent, setIsInitialMessageSent] = useState(false);
+  const [userType, setUserType] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
 
   const messagesEndRef = useRef(null);
+
+  // Função para rolar até o final
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     if (!isInitialMessageSent) {
       setIsTyping(true);
 
       setTimeout(() => {
-        setMessages([{ text: "Olá! Como posso ajudar?", sender: "bot" }]);
+        setMessages([
+          { text: "Olá! Você é aluno ou responsável?", sender: "bot" },
+        ]);
         setIsInitialMessageSent(true);
         setIsTyping(false);
-      }, 2500);
+      }, 1500);
     }
 
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollToBottom(); // Garantir que o scroll vai até o final
   }, [isInitialMessageSent]);
 
-  const initialOptions = [
-    { text: "Ver meus pedidos", value: "pedidos" },
-    { text: "Falar com atendente", value: "atendente" },
-    { text: "Dúvidas frequentes", value: "faq" },
-  ];
+  useEffect(() => {
+    scrollToBottom(); // Rolar sempre que uma nova mensagem ou opções forem adicionadas
+  }, [messages, showOptions]); // Dependências de mensagens e opções
 
-  const handleOptionClick = (optionValue) => {
-    sendMessage(optionValue);
-  };
-
-  const sendMessage = (text) => {
+  const handleUserInput = (text) => {
     if (text.trim() === "") return;
 
     setMessages([...messages, { text, sender: "user" }]);
     setInput("");
     setIsTyping(true);
+    setShowOptions(false);
 
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: "Entendi! Vou te ajudar com isso.", sender: "bot" },
-      ]);
-    }, 1000);
+    // Gera tempos aleatórios dentro de um intervalo adequado
+    const typingTime = Math.floor(Math.random() * 1000) + 1000; // Entre 1s e 2s
+    const showOptionsTime =
+      typingTime + Math.floor(Math.random() * 1000) + 1000; // Maior que typingTime
+
+    const result = fuse.search(text);
+
+    if (result.length > 0) {
+      const detectedIntent = result[0].item.category;
+      const response = result[0].item.response;
+
+      if (detectedIntent === "aluno" || detectedIntent === "responsavel") {
+        setUserType(detectedIntent);
+
+        setTimeout(() => {
+          setIsTyping(false);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+              text:
+                detectedIntent === "aluno"
+                  ? "Ótimo! Como posso te ajudar nos seus estudos?"
+                  : "Entendido! Como posso auxiliar você com informações da escola?",
+              sender: "bot",
+            },
+          ]);
+        }, typingTime);
+
+        setTimeout(() => {
+          setShowOptions(true);
+        }, showOptionsTime);
+      } else {
+        setTimeout(() => {
+          setIsTyping(false);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+              text: `Aqui estão informações sobre ${detectedIntent}!`,
+              sender: "bot",
+            },
+            {
+              text: response,
+              sender: "bot",
+            },
+          ]);
+        }, typingTime);
+
+        setTimeout(() => {
+          setShowOptions(true);
+        }, showOptionsTime);
+      }
+    } else {
+      setTimeout(() => {
+        setIsTyping(false);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: "Desculpe, não entendi. Pode reformular?", sender: "bot" },
+        ]);
+      }, typingTime);
+    }
   };
 
   return (
@@ -67,9 +125,20 @@ const Chatbot = () => {
           </button>
         </div>
         <div className="chatbot-content">
-          {messages.map((msg, index) => (
-            <MessageCard key={index} sender={msg.sender} text={msg.text} />
-          ))}
+          <AnimatePresence>
+            {messages.map((msg, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <MessageCard sender={msg.sender} text={msg.text} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+
           {isTyping && (
             <div className="dots">
               <ThreeDot
@@ -80,17 +149,50 @@ const Chatbot = () => {
               />
             </div>
           )}
-          {isInitialMessageSent && messages.length === 1 && (
-            <div className="options-container">
-              {initialOptions.map((option, index) => (
+
+          <AnimatePresence>
+            {isInitialMessageSent && userType === null && (
+              <motion.div
+                className="options-container"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Option
-                  key={index}
-                  text={option.text}
-                  onClick={() => handleOptionClick(option.text)}
+                  text="Sou aluno"
+                  onClick={() => handleUserInput("Sou aluno")}
                 />
-              ))}
-            </div>
-          )}
+                <Option
+                  text="Sou responsável"
+                  onClick={() => handleUserInput("Sou responsável")}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {userType && showOptions && (
+              <motion.div
+                className="options-container"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                {intents
+                  .filter((option) => option.type?.includes(userType))
+                  .map((option, index) => (
+                    <Option
+                      key={index}
+                      text={option.text}
+                      onClick={() => handleUserInput(option.text)}
+                    />
+                  ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <div ref={messagesEndRef} />
         </div>
         <div className="chatbot-input-container">
@@ -99,12 +201,12 @@ const Chatbot = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
+            onKeyDown={(e) => e.key === "Enter" && handleUserInput(input)}
             placeholder="Digite sua mensagem..."
           />
           <button
             className="chatbot-input-btn"
-            onClick={() => sendMessage(input)}
+            onClick={() => handleUserInput(input)}
             style={{
               opacity: input.length > 0 ? 1 : 0,
               pointerEvents: input.length > 0 ? "auto" : "none",

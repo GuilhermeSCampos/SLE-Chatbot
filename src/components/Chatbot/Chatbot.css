@@ -30,7 +30,7 @@
   position: absolute;
   bottom: 80px;
   right: 0;
-  width: 350px;
+  width: 400px;
   height: 550px;
   background-color: white;
   padding: 15px;
@@ -74,6 +74,8 @@
   padding: 10px;
   overflow-y: auto;
   max-height: 80%;
+  border-top: 1px solid rgb(202, 192, 192);
+  border-radius: 10px;
 }
 
 .chatbot-input-container {
@@ -102,4 +104,28 @@
   font-style: italic;
   color: gray;
   margin-left: 10px;
+}
+
+/* Estiliza o contêiner da rolagem para não exibir setas */
+.chatbot-content {
+  overflow: auto; /* Permite a rolagem automática */
+}
+
+/* Para navegadores baseados em WebKit (Chrome, Safari, Edge) */
+.chatbot-content::-webkit-scrollbar {
+  width: 6px; /* Largura da barra de rolagem */
+}
+
+.chatbot-content::-webkit-scrollbar-thumb {
+  background-color: #888; /* Cor da "thumb" da barra de rolagem */
+  border-radius: 10px; /* Arredonda a borda da "thumb" */
+}
+
+.chatbot-content::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Cor do fundo da barra de rolagem */
+}
+
+/* Remove as setas da barra de rolagem em navegadores baseados no WebKit */
+.chatbot-content::-webkit-scrollbar-button {
+  display: none;
 }
